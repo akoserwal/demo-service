@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+package api.testdomain.v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "demo-service/api/testdomain/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.testdomain.v1";
+
+service Demoservice {
+	rpc CreateDemo (CreateDemoRequest) returns (CreateDemoReply) {
+		option (google.api.http) = {
+		  post: "/api/testdomain/v1/demo"
+		  body : "*"
+		};
+	};
+	rpc UpdateDemo (UpdateDemoRequest) returns (UpdateDemoReply);
+	rpc DeleteDemo (DeleteDemoRequest) returns (DeleteDemoReply) {
+		option (google.api.http) = {
+		  delete: "/api/testdomain/v1/demo"
+		};
+	};
+	rpc GetDemo (GetDemoRequest) returns (GetDemoReply) {
+		option (google.api.http) = {
+		  get: "/api/testdomain/v1/demo/{name}"
+		};
+	};
+	rpc ListDemo (ListDemoRequest) returns (ListDemoReply) {
+		option (google.api.http) = {
+			get: "/api/testdomain/v1/demo"
+		};
+	};
+}
+
+message Demo {
+	string name = 1;
+	string email = 2;
+}
+
+message CreateDemoRequest {
+	Demo demo = 1;
+}
+message CreateDemoReply {
+	string message = 1;
+}
+
+message UpdateDemoRequest {}
+message UpdateDemoReply {}
+
+message DeleteDemoRequest {}
+message DeleteDemoReply {}
+
+message GetDemoRequest {
+	string name = 1;
+}
+message GetDemoReply {}
+
+message ListDemoRequest {
+	int64 count = 1;
+}
+message ListDemoReply {
+	repeated Demo demo = 1;
+}

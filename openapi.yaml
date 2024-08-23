@@ -1,0 +1,105 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/cmd/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: Demoservice API
+    version: 0.0.1
+paths:
+    /api/testdomain/v1/demo:
+        get:
+            tags:
+                - Demoservice
+            operationId: Demoservice_ListDemo
+            parameters:
+                - name: count
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.testdomain.v1.ListDemoReply'
+        post:
+            tags:
+                - Demoservice
+            operationId: Demoservice_CreateDemo
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.testdomain.v1.CreateDemoRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.testdomain.v1.CreateDemoReply'
+        delete:
+            tags:
+                - Demoservice
+            operationId: Demoservice_DeleteDemo
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.testdomain.v1.DeleteDemoReply'
+    /api/testdomain/v1/demo/{name}:
+        get:
+            tags:
+                - Demoservice
+            operationId: Demoservice_GetDemo
+            parameters:
+                - name: name
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.testdomain.v1.GetDemoReply'
+components:
+    schemas:
+        api.testdomain.v1.CreateDemoReply:
+            type: object
+            properties:
+                message:
+                    type: string
+        api.testdomain.v1.CreateDemoRequest:
+            type: object
+            properties:
+                demo:
+                    $ref: '#/components/schemas/api.testdomain.v1.Demo'
+        api.testdomain.v1.DeleteDemoReply:
+            type: object
+            properties: {}
+        api.testdomain.v1.Demo:
+            type: object
+            properties:
+                name:
+                    type: string
+                email:
+                    type: string
+        api.testdomain.v1.GetDemoReply:
+            type: object
+            properties: {}
+        api.testdomain.v1.ListDemoReply:
+            type: object
+            properties:
+                demo:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/api.testdomain.v1.Demo'
+tags:
+    - name: Demoservice
